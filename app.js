@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import { expressRouter } from './modules/index.js';
 import { connect } from './db.js';
 import pkg from 'body-parser';
+import { auth } from './modules/auth/auth.middleware.js';
 
 const app = express();
 const server = http.createServer(app);
@@ -25,6 +26,7 @@ app.use(cors());
 app.use(json());
 app.use(express.json());
 
+// app.use(auth);
 app.use(expressRouter);
 
 app.use((err, req, res, next)  => {
