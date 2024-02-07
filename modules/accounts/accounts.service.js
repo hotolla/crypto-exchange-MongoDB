@@ -1,21 +1,24 @@
-import { User } from '../users/user.model.js';
+import { updateAccounts } from '../users/users.service.js';
 
-export const updateUserAccount = async (chargedAccount) => {
+export const updateUserAccount = (user, chargeDetail) => {
   try {
-    const { accounts } = req.user;
-    const chargedAccounts = accounts.reduce((accounts, account) => {
-      if (account.currency === chargedAccount.currency) {
-        return {
-          ...account,
+    // const chargedAccounts = user.accounts.reduce((accounts, account) => {
+    const accountIndex = user.accounts.findIndex(
+      (account) => account.currency === chargeDetail.currency
+    );
 
-          amount: account.amount + chargedAccount.amount
-        };
-      }
-    });
+    if (accountIndex === -1) {
+      user.accounts.push({
+        currency: chargeDetail.currency,
+        amount: chargeDetail.amount
+      });
+    } else {
+      user.accounts[accountIndex].amount += chargeDetail.amount;
+    }
 
-    return
+    return updateAccounts(user._id, user.accounts);
   } catch (error) {
-    console.error('Error adding account:', error);
+    console.error('Error updating account:', error);
     throw error;
   }
 };

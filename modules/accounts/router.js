@@ -1,5 +1,5 @@
 import express from 'express';
-import { chargeAccount } from "./accounts.controller.js";
+import { chargeAccount } from './accounts.controller.js';
 
 export const accountsRouter = express.Router();
 

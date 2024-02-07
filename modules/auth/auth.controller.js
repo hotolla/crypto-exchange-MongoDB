@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 import * as authService from './auth.service.js';
 import { findUser } from '../users/users.service.js';
 
@@ -9,7 +8,7 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email } = req.body;
 
   try {
     const user = await findUser({ email });
@@ -18,6 +17,8 @@ export const login = async (req, res) => {
     }
 
     const loginData = await authService.login(user);
+
+    console.log(loginData);
     res.json(loginData);
   } catch (error) {
     console.error('Error comparing passwords:', error);

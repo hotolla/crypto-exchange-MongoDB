@@ -26,7 +26,7 @@ app.use(cors());
 app.use(json());
 app.use(express.json());
 
-// app.use(auth);
+app.use(auth);
 app.use(expressRouter);
 
 app.use((err, req, res, next)  => {
