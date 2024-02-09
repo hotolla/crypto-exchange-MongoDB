@@ -16,7 +16,7 @@ export const findUserByToken = (data) => {
   return User.findById(data);
 };
 
-export const updateAccounts = (userId, account) => {
-  console.log(userId, account, 'updateUserAccounts');
-    return  User.findByIdAndUpdate({ _id: userId.toString() }, { accounts: account });
+export const updateAccounts = ({ _id,  accounts }) => {
+  console.log(_id,  accounts, 'updateUserAccounts');
+  return  User.findByIdAndUpdate({ _id: _id.toString() }, { accounts: accounts });
 };

@@ -18,7 +18,6 @@ export const login = async (req, res) => {
 
     const loginData = await authService.login(user);
 
-    console.log(loginData);
     res.json(loginData);
   } catch (error) {
     console.error('Error comparing passwords:', error);

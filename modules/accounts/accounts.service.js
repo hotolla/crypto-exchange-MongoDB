@@ -1,5 +1,3 @@
-import { updateAccounts } from '../users/users.service.js';
-
 export const updateUserAccount = (user, chargeDetail) => {
   try {
     // const chargedAccounts = user.accounts.reduce((accounts, account) => {
@@ -16,7 +14,7 @@ export const updateUserAccount = (user, chargeDetail) => {
       user.accounts[accountIndex].amount += chargeDetail.amount;
     }
 
-    return updateAccounts(user._id, user.accounts);
+    return user;
   } catch (error) {
     console.error('Error updating account:', error);
     throw error;
