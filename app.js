@@ -1,12 +1,11 @@
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
+import pkg from 'body-parser';
 import { Server } from 'socket.io';
 import dotenv from 'dotenv';
-import { expressRouter } from './modules/index.js';
+import { router } from './modules/router.js';
 import { connect } from './db.js';
-import pkg from 'body-parser';
-import { auth } from './modules/auth/auth.middleware.js';
 
 const app = express();
 const server = http.createServer(app);
@@ -26,12 +25,11 @@ app.use(cors());
 app.use(json());
 app.use(express.json());
 
-app.use(auth);
-app.use(expressRouter);
+app.use(router);
 
-app.use((err, req, res, next)  => {
-  console.error(err.stack);
-  res.status(500).sent('Something broken!');
+app.use((error, req, res, next)  => {
+  console.log(error);
+  res.status(error.status || 500).send();
 });
 
 connect().then(() => {

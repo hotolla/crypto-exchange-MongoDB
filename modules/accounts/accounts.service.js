@@ -1,20 +1,20 @@
+import { updateUser } from '../users/users.service.js';
+
 export const updateUserAccount = (user, chargeDetail) => {
   try {
-    // const chargedAccounts = user.accounts.reduce((accounts, account) => {
-    const accountIndex = user.accounts.findIndex(
-      (account) => account.currency === chargeDetail.currency
-    );
+    const { accounts } = user;
+
+    const accountIndex = accounts.findIndex((account) => {
+      return account.currency === chargeDetail.currency;
+    });
 
     if (accountIndex === -1) {
-      user.accounts.push({
-        currency: chargeDetail.currency,
-        amount: chargeDetail.amount
-      });
+      accounts.push(chargeDetail);
     } else {
       user.accounts[accountIndex].amount += chargeDetail.amount;
     }
 
-    return user;
+    return updateUser(user._id, { accounts });
   } catch (error) {
     console.error('Error updating account:', error);
     throw error;

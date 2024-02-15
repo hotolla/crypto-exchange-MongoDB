@@ -1,6 +1,6 @@
 import express from 'express';
 import { chargeAccount } from './accounts.controller.js';
 
-export const accountsRouter = express.Router();
+export const router = express.Router();
 
-accountsRouter.post('/accounts', chargeAccount);
+router.post('/accounts', chargeAccount);
