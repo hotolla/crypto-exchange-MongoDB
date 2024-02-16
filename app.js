@@ -20,6 +20,14 @@ dotenv.config();
 
 io.on('connection', (socket) => {
   console.log(socket + 'a user connected');
+
+  socket.on('clientMessage', (message) => {
+    io.emit('message', message);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
+  });
 });
 app.use(cors());
 app.use(json());

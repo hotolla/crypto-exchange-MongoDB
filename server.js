@@ -1,18 +1,14 @@
 const http = require('http');
 const ws = require('ws');
 
-// import ws from "ws";
-
-const wss = new ws.Server({noServer: true});
+const wss = new ws.Server({ noServer: true });
 
 function accept(req, res) {
-  // все входящие запросы должны использовать websockets
   if (!req.headers.upgrade || req.headers.upgrade.toLowerCase() != 'websocket') {
     res.end();
     return;
   }
 
-  // может быть заголовок Connection: keep-alive, Upgrade
   if (!req.headers.connection.match(/\bupgrade\b/i)) {
     res.end();
     return;
@@ -26,7 +22,7 @@ function onConnect(ws) {
     console.log(data.toString());
     ws.send(data);
 
-    // setTimeout(() => ws.close(1000, "Пока!"), 5000);
+    // setTimeout(() => ws.close(1000, "Buy!"), 5000);
   });
 }
 

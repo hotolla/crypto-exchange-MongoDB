@@ -12,6 +12,9 @@ export const findUser = (data) => {
   return User.findOne(data);
 };
 
-export const updateUser = (id,  data) => {
-  return User.findByIdAndUpdate(id, data);
+export const updateUser = async (id,  data) => {
+  const user = await User.findOneAndUpdate(id, data);
+  console.log(user.accounts);
+
+  return user;
 };
