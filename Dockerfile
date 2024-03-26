@@ -1,36 +1,42 @@
-FROM node:16
+FROM node:18-alpine AS development
 
-RUN mkdir -p /usr/src/app
-# непонятно какой рабочий каталог внутри контейнера указать
-WORKDIR /usr/src/app
+# ENV PROXY START (https://caprover.com/docs/app-configuration.html#environment-variables)
 
-# копируем откуда и куда (файл package.json и package-lock.json) в контейнер
+ARG HOST
+ENV HOST=$HOST
+
+ARG USER
+ENV USER=$USER
+
+ARG PASSWORD
+ENV PASSWORD=$PASSWORD
+
+ARG DATABASE
+ENV DATABASE=$DATABASE
+
+ARG MONGODB_URI
+ENV MONGODB_URI=$MONGODB_URI
+
+ARG JWT_AUTH_SECRET_KEY
+ENV JWT_AUTH_SECRET_KEY=$JWT_AUTH_SECRET_KEY
+
+# ENV PROXY END
+
+# RUN #mkdir -p /usr/src/app
+# don't underst.
+WORKDIR /app
+
 #COPY package*.json ./
-COPY . /usr/src/app
+COPY package*.json ./
 
-# Установите зависимости, выпол.команду, кот. идет после ран
-#RUN #npm install
+RUN npm ci --include=dev --legacy-peer-deps
 
-EXPOSE 8000
+#EXPOSE 8000
+COPY . .
 
-CMD [ "npm", "start" ]
+RUN npm run build
 
-## копирует все файлы из текущей директории (включая исходный код) в контейнер чтоб мое прилож. было оступно внутри контейнера при запуске
-#COPY . .
+#CMD npm start
+CMD npm serve
 
-# перемен. окружения для адреса MongoDB или можно в инв
-#ENV MONGODB_URI mongodb://localhost:27017/crypto-exchange
-
-# что нужно делать при запуске контейнера
-#CMD ["npm", "run serve"]
-
-#FROM node:16
-#
-#RUN mkdir -p /usr/src/app/
-#
-#WORKDIR /usr/src/app/
-#
-#COPY . /usr/src/app/
-#
-#CMD ["npm", "serve"]
 

@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
     console.log('A user disconnected');
   });
 });
+
 app.use(cors());
 app.use(json());
 app.use(express.json());
