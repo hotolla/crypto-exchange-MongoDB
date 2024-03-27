@@ -1,4 +1,6 @@
+#https://github.com/caprover/caprover/blob/master/dockerfiles/node
 FROM node:18-alpine AS development
+
 
 # ENV PROXY START (https://caprover.com/docs/app-configuration.html#environment-variables)
 
@@ -31,3 +33,5 @@ RUN npm ci --include=dev --legacy-peer-deps
 COPY . .
 
 CMD npm start
+
+EXPOSE 8000
