@@ -44,9 +44,8 @@ app.use((error, req, res, next)  => {
   res.status(error.status || 500).send();
 });
 
-connect().then(() => {
-  server.listen(8000, () => {
-    // eslint-disable-next-line no-console
-    console.log('listening on 8000');
-  });
+server.listen(8000, () => {
+  // eslint-disable-next-line no-console
+  console.log('listening on 8000');
+  connect();
 });
