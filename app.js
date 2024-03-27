@@ -42,7 +42,7 @@ app.use((error, req, res, next)  => {
 });
 
 connect().then(() => {
-  server.listen(8000, () => {
+  server.listen('https://crypto-backend.dev.koltsova.tech:8000', () => {
     // eslint-disable-next-line no-console
     console.log('listening on *:8000');
   });
