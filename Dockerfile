@@ -30,6 +30,4 @@ RUN npm ci --include=dev --legacy-peer-deps
 
 COPY . .
 
-RUN npm run start
-
-CMD npm serve
+CMD npm start
