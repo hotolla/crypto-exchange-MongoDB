@@ -8,6 +8,7 @@ import { router } from './modules/router.js';
 import { connect } from './db.js';
 
 const app = express();
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -15,6 +16,8 @@ const io = new Server(server, {
   }
 });
 const { json } = pkg;
+const port = 8000;
+const hostname = 'crypto-backend.dev.koltsova.tech';
 
 dotenv.config();
 
@@ -42,8 +45,8 @@ app.use((error, req, res, next)  => {
 });
 
 connect().then(() => {
-  server.listen('https://crypto-backend.dev.koltsova.tech:8000', () => {
+  server.listen(port, hostname, () => {
     // eslint-disable-next-line no-console
-    console.log('listening on *:8000');
+    console.log('listening on *:crypto-backend.dev.koltsova.tech:8000');
   });
 });

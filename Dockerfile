@@ -22,21 +22,16 @@ ENV JWT_AUTH_SECRET_KEY=$JWT_AUTH_SECRET_KEY
 
 # ENV PROXY END
 
-# RUN #mkdir -p /usr/src/app
-# don't underst.
 WORKDIR /app
 
-#COPY package*.json ./
 COPY package*.json ./
 
 RUN npm ci --include=dev --legacy-peer-deps
 
-#EXPOSE 8000
 COPY . .
 
 RUN npm run build
 
-#CMD npm start
-CMD npm serve
+CMD npm start
 
 
