@@ -18,4 +18,4 @@ RUN npm ci --include=dev --legacy-peer-deps
 
 COPY . .
 
-CMD npm start
+CMD npm run start
